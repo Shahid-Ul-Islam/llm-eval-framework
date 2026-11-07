@@ -13,3 +13,7 @@ the project uses [Semantic Versioning](https://semver.org/).
   `Usage`, `ScoreResult`, `RunRecord`), env/`.env` settings, and a pricing table with
   hardcoded defaults plus JSON/YAML override file (`LLM_EVAL_PRICING_FILE`).
 - `.env.example`, `.gitattributes` (LF line endings).
+- JSONL dataset loader with validation (line-numbered errors, duplicate-id check),
+  tag filtering and name resolution (`coding` -> `datasets/coding.jsonl`).
+- Sample datasets: `coding.jsonl` (6 Python, 3 SQL, 1 JSON task with per-item test
+  specs) and `reasoning.jsonl` (10 logic/math items with exact + regex answers).
