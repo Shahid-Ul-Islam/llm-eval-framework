@@ -46,6 +46,11 @@ the project uses [Semantic Versioning](https://semver.org/).
 - `Runner`: evaluates dataset x models x templates with bounded concurrency; generation
   failures and crashing scorers are recorded per item instead of aborting the run;
   inapplicable scorers are skipped; interrupted runs are marked `aborted`.
+- Reporting: aggregation by model/template/tag/scorer/run (mean score, pass rate, errors,
+  cost, tokens, latency, cache hits); Markdown tables and a self-contained HTML report
+  (autoescaped, light/dark aware, per-tag pivot).
+- A/B comparison by template, model or run on paired examples: means, delta, win/loss/tie,
+  exact sign-test p-value and per-tag deltas.
 
 ### Changed
 - Default `max_tokens` raised from 2048 to 16000 so thinking models are not truncated.
