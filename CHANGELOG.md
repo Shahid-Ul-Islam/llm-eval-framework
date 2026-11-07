@@ -43,6 +43,10 @@ the project uses [Semantic Versioning](https://semver.org/).
   averages.
 - Result storage: per-run JSONL file plus SQLite `results.db` (`runs`, `results`,
   `scores` tables) with run listing, latest-run lookup and record loading.
+- `Runner`: evaluates dataset x models x templates with bounded concurrency; generation
+  failures and crashing scorers are recorded per item instead of aborting the run;
+  inapplicable scorers are skipped; interrupted runs are marked `aborted`.
 
 ### Changed
 - Default `max_tokens` raised from 2048 to 16000 so thinking models are not truncated.
+- SQLite cache and results DB use WAL + `synchronous=NORMAL` (4x faster writes on Windows).
