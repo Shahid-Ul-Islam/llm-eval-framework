@@ -229,24 +229,30 @@ force fresh calls, for example to measure run-to-run variance.
 # src/llm_eval/providers/my_provider.py
 from llm_eval.models import GenerationRequest
 from llm_eval.providers.base import (
-    BaseProvider, Completion, ProviderError, RateLimitError, TransientError, register_provider,
+    BaseProvider,
+    Completion,
+    ProviderError,
+    RateLimitError,
+    TransientError,
+    register_provider,
 )
+
 
 @register_provider
 class MyProvider(BaseProvider):
-    name = "myprov"                       # used as `myprov:<model>` on the CLI
+    name = "myprov"  # used as `myprov:<model>` on the CLI
 
     async def _complete(self, request: GenerationRequest) -> Completion:
         try:
             text, n_in, n_out = await call_my_api(
                 request.model, request.prompt, request.system, request.max_tokens
             )
-        except MyRateLimit as e:          # map backend errors so retries work:
-            raise RateLimitError(str(e), retry_after=e.retry_after) from e   # 429
+        except MyRateLimit as e:  # map backend errors so retries work:
+            raise RateLimitError(str(e), retry_after=e.retry_after) from e  # 429
         except MyServerError as e:
-            raise TransientError(str(e)) from e                              # retryable
+            raise TransientError(str(e)) from e  # retryable
         except MyClientError as e:
-            raise ProviderError(str(e)) from e                               # fatal
+            raise ProviderError(str(e)) from e  # fatal
         return Completion(text=text, input_tokens=n_in, output_tokens=n_out)
 ```
 
@@ -263,12 +269,13 @@ Settings and pricing are available as `self.settings` and `self.pricing`; overri
 from llm_eval.models import Example, ScoreResult
 from llm_eval.scorers.base import BaseScorer, ScoringContext, register_scorer
 
+
 @register_scorer
 class MaxLengthScorer(BaseScorer):
-    name = "max_length"                   # used with `-s max_length`
+    name = "max_length"  # used with `-s max_length`
 
     def applicable(self, example: Example) -> bool:
-        return "max_chars" in self.args(example)     # reads scorer_args.max_length
+        return "max_chars" in self.args(example)  # reads scorer_args.max_length
 
     async def score(self, example: Example, output: str, ctx: ScoringContext) -> ScoreResult:
         limit = self.args(example)["max_chars"]
