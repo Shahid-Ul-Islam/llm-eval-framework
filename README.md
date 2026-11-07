@@ -297,3 +297,7 @@ ruff check . && ruff format --check .
 
 CI (`.github/workflows/ci.yml`) runs ruff, plus pytest on Ubuntu and Windows.
 See [CHANGELOG.md](CHANGELOG.md) for history.
+
+## License
+
+Released under the [MIT License](LICENSE). Copyright (c) 2026 Shahid Ul Islam.
