@@ -6,6 +6,10 @@ the project uses [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-11-07
+
+First release.
+
 ### Added
 - Project skeleton: `pyproject.toml` (hatchling, ruff, pytest config, `llm-eval` entry point),
   `src/llm_eval/` package, Python `.gitignore`, this changelog.
@@ -59,7 +63,8 @@ the project uses [Semantic Versioning](https://semver.org/).
   Windows (Python 3.12, no API keys required).
 - README: Mermaid architecture diagram, quickstart, CLI/dataset/scorer/config reference,
   and guides for adding a provider or scorer.
+- Defaults: `max_tokens` 16000 (so thinking models are not truncated); SQLite cache and
+  results DB in WAL mode with `synchronous=NORMAL` for fast writes.
 
-### Changed
-- Default `max_tokens` raised from 2048 to 16000 so thinking models are not truncated.
-- SQLite cache and results DB use WAL + `synchronous=NORMAL` (4x faster writes on Windows).
+[Unreleased]: https://github.com/Shahid-Ul-Islam/llm-eval-framework/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/Shahid-Ul-Islam/llm-eval-framework/releases/tag/v0.1.0
