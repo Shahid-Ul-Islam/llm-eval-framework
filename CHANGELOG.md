@@ -24,3 +24,8 @@ the project uses [Semantic Versioning](https://semver.org/).
   registry with `provider:model` spec parsing.
 - Offline `mock` provider (`echo`, `empty`, `error` models; canned responses and
   injectable rate-limit/transient failures for tests).
+- Reliability: `RetryPolicy` + `with_retries` (exponential backoff with jitter, honors
+  `Retry-After` on rate limits, capped at `retry_max_delay`; fatal errors not retried).
+- SQLite response cache keyed by SHA-256 of provider + request.
+- `LLMClient`: resolves `provider:model` specs, applies cache and retries, and tracks
+  per-model calls, cache hits, retries, errors, tokens and cost.
