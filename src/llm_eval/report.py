@@ -170,6 +170,38 @@ def build_report(runs: Sequence[RunInfo], records: Sequence[RunRecord]) -> Repor
     )
 
 
+def render_overall_table(data: ReportData) -> str:
+    return markdown_table(
+        [
+            "Model",
+            "Template",
+            "N",
+            "Mean score",
+            "Pass rate",
+            "Gen errors",
+            "Cost",
+            "Tokens in/out",
+            "Avg latency",
+            "Cached",
+        ],
+        [
+            [
+                a.key[0],
+                a.key[1],
+                str(a.n),
+                fmt_score(a.mean_score),
+                fmt_pct(a.pass_rate),
+                str(a.gen_errors),
+                fmt_cost(a),
+                f"{a.input_tokens}/{a.output_tokens}",
+                fmt_latency(a.avg_latency),
+                str(a.cached),
+            ]
+            for a in data.overall
+        ],
+    )
+
+
 def render_markdown(data: ReportData) -> str:
     out = ["# LLM Eval Report", ""]
     for r in data.runs:
@@ -177,38 +209,7 @@ def render_markdown(data: ReportData) -> str:
             f"- **Run** `{r.run_id}` - dataset `{r.dataset}`, status {r.status}, "
             f"{r.n_records} records, created {r.created_at:%Y-%m-%d %H:%M} UTC"
         )
-    out += ["", "## Overall (per model / template)", ""]
-    out.append(
-        markdown_table(
-            [
-                "Model",
-                "Template",
-                "N",
-                "Mean score",
-                "Pass rate",
-                "Gen errors",
-                "Cost",
-                "Tokens in/out",
-                "Avg latency",
-                "Cached",
-            ],
-            [
-                [
-                    a.key[0],
-                    a.key[1],
-                    str(a.n),
-                    fmt_score(a.mean_score),
-                    fmt_pct(a.pass_rate),
-                    str(a.gen_errors),
-                    fmt_cost(a),
-                    f"{a.input_tokens}/{a.output_tokens}",
-                    fmt_latency(a.avg_latency),
-                    str(a.cached),
-                ]
-                for a in data.overall
-            ],
-        )
-    )
+    out += ["", "## Overall (per model / template)", "", render_overall_table(data)]
     out += ["", "## Per scorer", ""]
     out.append(
         markdown_table(

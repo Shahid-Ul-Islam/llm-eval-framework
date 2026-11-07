@@ -51,6 +51,10 @@ the project uses [Semantic Versioning](https://semver.org/).
   (autoescaped, light/dark aware, per-tag pivot).
 - A/B comparison by template, model or run on paired examples: means, delta, win/loss/tie,
   exact sign-test p-value and per-tag deltas.
+- Typer CLI `llm-eval` (also `python -m llm_eval`): `run` (dataset x models x templates
+  with scorers, tag filter, limit, concurrency, `--no-cache`, judge model; prints score
+  and usage/cost summary), `compare` (A/B by template, model or run), `report` (Markdown
+  + HTML files) and `runs` (list recent runs). Input errors exit with code 2.
 
 ### Changed
 - Default `max_tokens` raised from 2048 to 16000 so thinking models are not truncated.
