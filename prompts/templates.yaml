@@ -1,0 +1,20 @@
+# Prompt variants for A/B comparison.
+# Placeholders: {prompt} (the example prompt), {id}, {tags} (comma-separated).
+# Any other braces are left untouched, so JSON/code in templates is safe.
+
+baseline:
+  template: "{prompt}"
+
+concise:
+  system: "You are a precise assistant. Be brief and follow the requested output format exactly."
+  template: "{prompt}"
+
+expert:
+  system: >-
+    You are a senior software engineer and careful logician. Double-check edge cases
+    before answering, and follow the requested output format exactly.
+  template: |-
+    Task:
+    {prompt}
+
+    Before finalizing, verify your answer against the task requirements.

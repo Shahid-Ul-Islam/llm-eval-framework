@@ -17,3 +17,5 @@ the project uses [Semantic Versioning](https://semver.org/).
   tag filtering and name resolution (`coding` -> `datasets/coding.jsonl`).
 - Sample datasets: `coding.jsonl` (6 Python, 3 SQL, 1 JSON task with per-item test
   specs) and `reasoning.jsonl` (10 logic/math items with exact + regex answers).
+- Prompt templates: YAML-defined named variants (`baseline`, `concise`, `expert`) with
+  optional system prompt; safe `{prompt}`/`{id}`/`{tags}` substitution for A/B runs.
