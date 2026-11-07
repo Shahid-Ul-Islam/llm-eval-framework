@@ -6,6 +6,8 @@ the project uses [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-11-07
+
 ### Fixed
 - `compare`: paired examples are now processed in sorted (example id) order. Iterating
   a set intersection made per-tag delta order depend on `PYTHONHASHSEED`, which caused
@@ -71,5 +73,6 @@ First release.
 - Defaults: `max_tokens` 16000 (so thinking models are not truncated); SQLite cache and
   results DB in WAL mode with `synchronous=NORMAL` for fast writes.
 
-[Unreleased]: https://github.com/Shahid-Ul-Islam/llm-eval-framework/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/Shahid-Ul-Islam/llm-eval-framework/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/Shahid-Ul-Islam/llm-eval-framework/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/Shahid-Ul-Islam/llm-eval-framework/releases/tag/v0.1.0
