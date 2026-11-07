@@ -9,3 +9,7 @@ the project uses [Semantic Versioning](https://semver.org/).
 ### Added
 - Project skeleton: `pyproject.toml` (hatchling, ruff, pytest config, `llm-eval` entry point),
   `src/llm_eval/` package, Python `.gitignore`, this changelog.
+- Core pydantic models (`Example`, `PromptTemplate`, `GenerationRequest`, `ModelResponse`,
+  `Usage`, `ScoreResult`, `RunRecord`), env/`.env` settings, and a pricing table with
+  hardcoded defaults plus JSON/YAML override file (`LLM_EVAL_PRICING_FILE`).
+- `.env.example`, `.gitattributes` (LF line endings).
