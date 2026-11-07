@@ -34,6 +34,13 @@ the project uses [Semantic Versioning](https://semver.org/).
   rate-limit/transient/fatal, token usage and cost captured, lazy SDK imports.
   Anthropic: no sampling params sent, `[refusal]` marker on refusals, no silent
   fallback to another model.
+- Scorers with registry and per-item `scorer_args`: `exact` (normalized, `Answer:` line
+  extraction), `regex`, `json_schema` (Draft 2020-12, JSON extracted from fences/text),
+  `unit_test` (Python asserts or SQLite query vs expected rows, run in an isolated
+  subprocess with timeout; not a security sandbox), and `llm_judge` (rubric:
+  correctness/clarity/safety 1-5, normalized to 0-1, configurable judge model).
+- `ScoreResult.error`: scoring-infrastructure failures are recorded but excluded from
+  averages.
 
 ### Changed
 - Default `max_tokens` raised from 2048 to 16000 so thinking models are not truncated.

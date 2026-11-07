@@ -67,12 +67,17 @@ class ModelResponse(BaseModel):
 
 
 class ScoreResult(BaseModel):
-    """Normalized score: `score` is always in [0, 1]."""
+    """Normalized score: `score` is always in [0, 1].
+
+    `error` marks a scoring *infrastructure* failure (bad pattern, judge returned
+    unparseable output...). Errored scores are stored but excluded from aggregates.
+    """
 
     scorer: str
     score: float
     passed: bool | None = None
     details: dict[str, Any] = Field(default_factory=dict)
+    error: str | None = None
 
 
 class RunRecord(BaseModel):
@@ -95,6 +100,5 @@ class RunRecord(BaseModel):
 
     @property
     def mean_score(self) -> float | None:
-        if not self.scores:
-            return None
-        return sum(s.score for s in self.scores) / len(self.scores)
+        valid = [s.score for s in self.scores if s.error is None]
+        return sum(valid) / len(valid) if valid else None
