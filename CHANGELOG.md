@@ -41,6 +41,8 @@ the project uses [Semantic Versioning](https://semver.org/).
   correctness/clarity/safety 1-5, normalized to 0-1, configurable judge model).
 - `ScoreResult.error`: scoring-infrastructure failures are recorded but excluded from
   averages.
+- Result storage: per-run JSONL file plus SQLite `results.db` (`runs`, `results`,
+  `scores` tables) with run listing, latest-run lookup and record loading.
 
 ### Changed
 - Default `max_tokens` raised from 2048 to 16000 so thinking models are not truncated.
