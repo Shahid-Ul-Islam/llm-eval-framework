@@ -117,4 +117,4 @@ def parse_model_spec(spec: str) -> tuple[str, str]:
 
 def _ensure_builtin_providers() -> None:
     # Imported lazily so the registry is populated without import cycles.
-    from llm_eval.providers import mock  # noqa: F401
+    from llm_eval.providers import anthropic_provider, mock, openai_provider  # noqa: F401

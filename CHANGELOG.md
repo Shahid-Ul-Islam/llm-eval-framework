@@ -29,3 +29,11 @@ the project uses [Semantic Versioning](https://semver.org/).
 - SQLite response cache keyed by SHA-256 of provider + request.
 - `LLMClient`: resolves `provider:model` specs, applies cache and retries, and tracks
   per-model calls, cache hits, retries, errors, tokens and cost.
+- OpenAI (Chat Completions) and Anthropic (Messages) providers on the official async
+  SDKs: SDK retries disabled in favor of our retry layer, SDK errors mapped to
+  rate-limit/transient/fatal, token usage and cost captured, lazy SDK imports.
+  Anthropic: no sampling params sent, `[refusal]` marker on refusals, no silent
+  fallback to another model.
+
+### Changed
+- Default `max_tokens` raised from 2048 to 16000 so thinking models are not truncated.

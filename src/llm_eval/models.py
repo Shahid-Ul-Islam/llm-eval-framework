@@ -50,7 +50,7 @@ class GenerationRequest(BaseModel):
     model: str
     prompt: str
     system: str | None = None
-    max_tokens: int = 2048
+    max_tokens: int = 16000
     temperature: float | None = None  # ignored by providers that reject sampling params
 
     def cache_key_payload(self) -> dict[str, Any]:

@@ -63,7 +63,7 @@ class LLMClient:
         prompt: str,
         *,
         system: str | None = None,
-        max_tokens: int = 2048,
+        max_tokens: int = 16000,
         temperature: float | None = None,
     ) -> ModelResponse:
         provider_name, model = parse_model_spec(spec)
