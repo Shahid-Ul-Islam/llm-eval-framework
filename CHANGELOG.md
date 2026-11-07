@@ -19,3 +19,8 @@ the project uses [Semantic Versioning](https://semver.org/).
   specs) and `reasoning.jsonl` (10 logic/math items with exact + regex answers).
 - Prompt templates: YAML-defined named variants (`baseline`, `concise`, `expert`) with
   optional system prompt; safe `{prompt}`/`{id}`/`{tags}` substitution for A/B runs.
+- Provider abstraction: `BaseProvider` (async `_complete`, timing + cost in `generate`),
+  error hierarchy (`ProviderError`, `TransientError`, `RateLimitError` with `retry_after`),
+  registry with `provider:model` spec parsing.
+- Offline `mock` provider (`echo`, `empty`, `error` models; canned responses and
+  injectable rate-limit/transient failures for tests).
