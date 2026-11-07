@@ -6,6 +6,11 @@ the project uses [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Fixed
+- `compare`: paired examples are now processed in sorted (example id) order. Iterating
+  a set intersection made per-tag delta order depend on `PYTHONHASHSEED`, which caused
+  flaky CI failures. Added a regression test that runs under several hash seeds.
+
 ## [0.1.0] - 2026-11-07
 
 First release.

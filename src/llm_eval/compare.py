@@ -80,7 +80,10 @@ def compare(
             side[v][pair_key(r)] = r
 
     results: dict[str, Comparison] = {}
-    for key in side[a].keys() & side[b].keys():
+    # Sort the paired keys (example id, then held-fixed context): a bare set intersection
+    # iterates in hash order, which varies per process (PYTHONHASHSEED) and made
+    # per-tag delta lists nondeterministic.
+    for key in sorted(side[a].keys() & side[b].keys()):
         ra, rb = side[a][key], side[b][key]
         cmp = results.setdefault(context(ra), Comparison(group=context(ra), a=a, b=b))
         sa, sb = ra.mean_score, rb.mean_score

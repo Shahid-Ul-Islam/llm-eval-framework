@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import pytest
 
 from llm_eval.compare import compare, render_comparison_markdown, variants
@@ -90,6 +92,28 @@ def test_compare_templates():
     md = render_comparison_markdown(comps, "template")
     assert "+0.667" in md and "Delta per tag" in md
     assert variants(RECORDS, "template") == ["A", "B"]
+
+
+@pytest.mark.parametrize("seed", ["0", "2", "5", "42"])
+def test_compare_order_is_independent_of_hash_seed(seed):
+    """Regression: pairing used to iterate a set in hash order (flaky on CI)."""
+    import os
+    import subprocess
+    import sys
+
+    code = (
+        "from tests.test_report import RECORDS\n"
+        "from llm_eval.compare import compare\n"
+        "[c] = compare(RECORDS, 'template', 'A', 'B')\n"
+        "print(dict(c.tag_deltas))\n"
+    )
+    env = {**os.environ, "PYTHONHASHSEED": seed}
+    root = Path(__file__).resolve().parents[1]
+    out = subprocess.run(
+        [sys.executable, "-c", code], cwd=root, env=env, capture_output=True, text=True
+    )
+    assert out.returncode == 0, out.stderr
+    assert out.stdout.strip() == "{'math': [1.0, 0.0], 'logic': [0.0, 1.0]}"
 
 
 def test_compare_models_and_runs():
