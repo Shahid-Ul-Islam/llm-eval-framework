@@ -55,6 +55,8 @@ the project uses [Semantic Versioning](https://semver.org/).
   with scorers, tag filter, limit, concurrency, `--no-cache`, judge model; prints score
   and usage/cost summary), `compare` (A/B by template, model or run), `report` (Markdown
   + HTML files) and `runs` (list recent runs). Input errors exit with code 2.
+- GitHub Actions CI: `ruff check` + `ruff format --check`, and `pytest` on Ubuntu and
+  Windows (Python 3.12, no API keys required).
 
 ### Changed
 - Default `max_tokens` raised from 2048 to 16000 so thinking models are not truncated.
